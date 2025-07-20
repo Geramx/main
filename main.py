@@ -49,11 +49,12 @@ app = FastAPI()
 # Permite que otros dominios (como tu web WordPress) hagan peticiones
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # ⚠️ En producción cámbialo por ["https://tusitio.com"]
+    allow_origins=["https://redespoder.com"],  # 👈 tu dominio
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 class Question(BaseModel):
     question: str
