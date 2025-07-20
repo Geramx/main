@@ -14,6 +14,8 @@ from semantic_filter2 import quitar_redundancia_respetando_contenido
 from dotenv import load_dotenv
 
 load_dotenv()
+app = FastAPI()
+
 
 chat = ChatOpenAI()
 embeddings = OpenAIEmbeddings()
@@ -43,9 +45,6 @@ retrieval_chain = (
     | chat
     | StrOutputParser()
 )
-
-app = FastAPI()
-
 # Permite que otros dominios (como tu web WordPress) hagan peticiones
 app.add_middleware(
     CORSMiddleware,
