@@ -62,5 +62,11 @@ class Question(BaseModel):
 
 @app.post("/preguntar")
 async def preguntar(data: Question):
-    resultado = retrieval_chain.invoke({"question": data.question})
-    return {"respuesta": resultado}
+    try:
+        resultado = retrieval_chain.invoke({"question": data.question})
+        if not resultado.strip():
+            return {"respuesta": "No encontré información relevante para esa pregunta."}
+        return {"respuesta": resultado}
+    except Exception as e:
+        return {"error": str(e)}
+
